@@ -13,21 +13,19 @@ var config = {
 firebase.initializeApp(config);
 
 
-
-
-$( "#btn-register" ).click(function() {
+$("#btn-register").click(function () {
 
     var name = document.getElementById('name').value;
     var email = document.getElementById('email').value;
     var password = document.getElementById('inputPassword').value;
     var reType = document.getElementById('retype').value;
 
-    if(password.length<6){
+    if (password.length < 6) {
         alert("Use at least 6 characters for Password!");
-    }else if(password != reType){
+    } else if (password != reType) {
         alert("Re-typed password doesn't match!");
-    }else {
-        firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+    } else {
+        firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
             var errorCode = error.code;
             var errorMessage = error.message;
 
@@ -38,7 +36,51 @@ $( "#btn-register" ).click(function() {
             }
 
         });
+
     }
 
 
 });
+
+$("#btn-login").click(function () {
+
+    var email = document.getElementById('user-email').value;
+    var password = document.getElementById('user-inputPassword').value;
+
+   // alert("login");
+        firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            if (errorCode === 'auth/wrong-password') {
+                alert('Wrong password.');
+            } else {
+                alert(errorMessage);
+                console.log(errorMessage);
+            }
+            console.log(error);
+
+        });
+
+        firebase.auth().onAuthStateChanged(function(user){
+            if(user){
+                console.log("user");
+                window.location.replace('search.html');
+            }else {
+                // alert("not a user");
+                console.log("not a user");
+                window.location.replace("http://www.google.com");
+            }
+        });
+});
+
+$("#logout").click(function () {
+    firebase.auth().signOut().then(function() {
+        // Sign-out successful.
+    }).catch(function(error) {
+        // An error happened.
+    });
+
+});
+
+
+
