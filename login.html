@@ -41,7 +41,7 @@
         <div class="navbar-collapse collapse" id="navbar-main">
           <ul class="nav navbar-nav navbar-right">
             <li><a href="" target="">Search</a></li>
-            <li><a href="login.html" target="">Register</a></li>
+            <li><a href="register.html" target="">Register</a></li>
           </ul>
         </div>
       </div>
@@ -51,15 +51,14 @@
 </div>
 <div class="col-md-6" style="top: 145px;">
         <div class="row">
-          
             <div class="well bs-component">
               <form class="form-horizontal">
                 <fieldset>
                   <legend>Login</legend>
                   <div class="form-group">
-                    <label for="username" class="col-lg-2 control-label">Username</label>
+                    <label for="email" class="col-lg-2 control-label">Email</label>
                     <div class="col-lg-10">
-                      <input class="form-control" id="username" placeholder="Username" type="text">
+                      <input class="form-control" id="email" placeholder="Email" type="text">
                     </div>
                   </div>
                   <div class="form-group">
@@ -102,6 +101,11 @@
 <div class="col-md-3">
 </div>
  </div>
+    <script>
+        $("#reset").click(function() {
+            $(this).closest('form').find("input[type=text]").val("");
+        });
+    </script>
 
     <script src="assets/jquery-1.js"></script>
     <script src="assets/bootstrap.js"></script>
