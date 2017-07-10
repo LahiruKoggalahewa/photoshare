@@ -59,8 +59,8 @@
                         <div class="form-group">
                             <label for="image" class="col-lg-2 control-label">Image</label>
                             <div class="col-lg-10">
-                                <input id="image" type="file" onchange="readURL(this);">
-                                <img id="blah" src="#" alt="your image" class="col-md-12"/>
+                                <input id="image" class="btn btn-default" type="file" onchange="readURL(this);">
+                                <img id="blah" src="#" alt=" " class="col-md-12"/>
                             </div>
                         </div>
 
@@ -84,21 +84,14 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="inputPassword" class="col-lg-2 control-label">Password</label>
+                            <label for="description" class="col-lg-2 control-label">Description</label>
                             <div class="col-lg-10">
-                                <input class="form-control" id="inputPassword" placeholder="Password" type="password">
+                                <textarea class="form-control" id="description" placeholder="Description"></textarea>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="inputPassword" class="col-lg-2 control-label">Retype</label>
-                            <div class="col-lg-10">
-                                <input class="form-control" id="retype" placeholder="Retype" type="password">
-                            </div>
-                        </div>
-
                         <div class="form-group">
                             <div class="col-lg-10 col-lg-offset-2">
-                                <button type="submit" class="btn btn-primary">Register</button>
+                                <button type="submit" class="btn btn-primary">Upload</button>
                             </div>
                         </div>
                     </fieldset>
