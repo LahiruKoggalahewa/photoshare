@@ -1,6 +1,7 @@
 /**
  * Created by Kushan Sameera on 7/9/2017.
  */
+
 var config = {
     apiKey: "AIzaSyBGq3d3AzgS7kd_39_zaTlNIzMKN0kO9Is",
     authDomain: "photoshare-e2d7c.firebaseapp.com",
@@ -10,11 +11,11 @@ var config = {
     messagingSenderId: "784977229016"
 };
 
-firebase.initializeApp(config);
+
 
 
 $("#btn-register").click(function () {
-
+    firebase.initializeApp(config);
     var name = document.getElementById('name').value;
     var email = document.getElementById('email').value;
     var password = document.getElementById('inputPassword').value;
@@ -25,7 +26,12 @@ $("#btn-register").click(function () {
     } else if (password != reType) {
         alert("Re-typed password doesn't match!");
     } else {
-        firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
+        firebase.auth().createUserWithEmailAndPassword(email, password).then(function(user){
+            var nUser = firebase.auth().currentUser;
+            createUser(nUser);
+            console.log("User Registered");
+            window.location.replace('login.html');
+        },function (error) {
             var errorCode = error.code;
             var errorMessage = error.message;
 
@@ -39,7 +45,6 @@ $("#btn-register").click(function () {
 
     }
 
-
 });
 
 $("#btn-login").click(function () {
@@ -47,7 +52,6 @@ $("#btn-login").click(function () {
     var email = document.getElementById('user-email').value;
     var password = document.getElementById('user-inputPassword').value;
 
-   // alert("login");
         firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
             var errorCode = error.code;
             var errorMessage = error.message;
@@ -66,9 +70,7 @@ $("#btn-login").click(function () {
                 console.log("user");
                 window.location.replace('search.html');
             }else {
-                // alert("not a user");
                 console.log("not a user");
-                window.location.replace("http://www.google.com");
             }
         });
 });
@@ -81,6 +83,15 @@ $("#logout").click(function () {
     });
 
 });
+
+function createUser(nUser) {
+    var refe = firebase.database().ref('Users/'+nUser.uid);
+    var details = {
+        "name" : document.getElementById('name').value,
+        "email" : document.getElementById('email').value
+    };
+    refe.set(details);
+}
 
 
 
